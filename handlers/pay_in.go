@@ -9,10 +9,9 @@ import (
 func PayInHandler(merchantID, pubKeyID, priKeyPath string) tbot.HandlerFunction {
 	return func(m *tbot.Message) {
 		token := internal.GenerateAuthJWT(priKeyPath, merchantID, pubKeyID,
-			m.Message.Contact.FirstName+"_"+
-				m.Message.Contact.FirstName+"_"+
-				strconv.Itoa(m.Message.Contact.UserID)+
+			strconv.Itoa(m.From.ID)+
 				".telegram")
 		m.Reply(token)
+
 	}
 }

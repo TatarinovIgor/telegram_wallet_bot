@@ -31,12 +31,12 @@ func GenerateAuthJWT(keyPath, merchantID, pubKeyID, externalID string) string {
 	}
 	tokenPayload := Payload{pubKeyID, merchantID, externalID}
 
-	t := jwt.NewWithClaims(jwt.SigningMethodES256,
+	t := jwt.NewWithClaims(jwt.SigningMethodRS256,
 		jwt.MapClaims{
 			"payload": tokenPayload,
 			"sub":     "1234567890",
-			"exp":     time.Now().Unix(),
-			"iat":     time.Now().Add(time.Hour).Unix(),
+			"iat":     time.Now().Unix(),
+			"exp":     time.Now().Add(time.Hour).Unix(),
 		})
 	jwtToken, err := t.SignedString(private)
 	if err != nil {
